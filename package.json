@@ -2,7 +2,7 @@
   "name": "midi-parser",
   "version": "0.1.0",
   "description": "A node js midi data parser that blisfully ignores all hardware and networking.",
-  "main": "parser.js",
+  "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/nodeunit test"
   },

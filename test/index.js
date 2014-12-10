@@ -32,7 +32,7 @@ describe["#emitSysEx"] = function (test) {
 };
 
 describe["sysex command"] = function (test) {
-  var message = [msg.startSysex, 99, msg.endSysex];
+  var message = [msg.startSysEx, 99, msg.endSysEx];
   var spy = sinon.spy();
   this.parser.on('sysex', spy);
   this.parser.write(message);
@@ -41,7 +41,7 @@ describe["sysex command"] = function (test) {
 };
 
 describe["sysex command during command"] = function (test) {
-  var message = [msg.startSysex, msg.startSysex, 99, msg.endSysex];
+  var message = [msg.startSysEx, msg.startSysEx, 99, msg.endSysEx];
   var spy = sinon.spy();
   this.parser.on('sysex', spy);
   this.parser.write(message);
@@ -60,7 +60,7 @@ describe["midi command"] = function (test) {
 describe["Command during a Sysex Command clears current Sysex"] = function (test) {
   var spy = sinon.spy();
   this.parser.on('midi', spy);
-  this.parser.write([msg.startSysex]);
+  this.parser.write([msg.startSysEx]);
   this.parser.write(soundOff);
   test.ok(spy.calledWith(176, 12, [120, 0]), "midi command emitted");
   test.done();
@@ -78,7 +78,7 @@ describe["midi System Realtime Commands emit during sysex"] = function (test) {
   var spy = sinon.spy();
   this.parser.on('midi', spy);
   this.parser.on('sysex', spy);
-  this.parser.write([msg.startSysex, systemReset[0], 99, msg.endSysex]);
+  this.parser.write([msg.startSysEx, systemReset[0], 99, msg.endSysEx]);
   test.ok(spy.getCall(0).calledWith(systemReset[0], null, []), 'realtime command emited');
   test.ok(spy.getCall(1).calledWith(99, []), 'sysex command emited');
   test.done();
@@ -113,12 +113,12 @@ describe["midi channel voice messages"] = function (test) {
 };
 
 describe["midi channel voice messages with 1 data byte"] = function (test) {
-  var chanPressure2 = msg.chanPressure + 2;
+  var chanPressure2 = msg.chanAT + 2;
   var packet = [chanPressure2, 0];
   var spy = sinon.spy();
   this.parser.on('midi', spy);
   this.parser.write(packet);
-  test.ok(spy.calledWith(msg.chanPressure, 2, [0]), "Channel voice message");
+  test.ok(spy.calledWith(msg.chanAT, 2, [0]), "Channel voice message");
   test.done();
 };
 
